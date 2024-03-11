@@ -1,0 +1,7 @@
+D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\bin\Debug\projektmunka.exe.config
+D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\bin\Debug\projektmunka.exe
+D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\bin\Debug\projektmunka.pdb
+D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.csproj.AssemblyReference.cache
+D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.csproj.CoreCompileInputs.cache
+D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.exe
+D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.pdb
