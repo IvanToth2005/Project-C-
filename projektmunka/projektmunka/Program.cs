@@ -10,22 +10,114 @@ namespace ConsoleApp1
 {
     internal class Program
     {
+        static List<Datas> list = new List<Datas>();
+
         class Datas
         {
             public string name;
             public double price;
             public int amount;
             public string parameters;
+
+            public void s_kiirat()
+            {
+                Console.WriteLine("Neve,  Ára,  Raktáron,  Paraméterei");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i].amount == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+                    }
+                    else if (list[i].amount >= 1 && list[i].amount < 10)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+                    }
+                    else if (list[i].amount >= 10)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+
+                    }
+
+                }
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("---------------------------------------------------------------------------------------");
+                Console.WriteLine("Fogytán lévő tekmékek: ");
+                Console.WriteLine("---------------------------------------------------------------------------------------");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i].amount <= 10)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("---------------------------------------------------------------------------------------");
+                        Console.WriteLine(list[i].name);
+                    }
+                }
+                Console.ReadKey();
+            }
+
+            public void r_kiirat()
+            {
+                ConsoleKeyInfo figyel;
+                int szamol = 0;
+                do
+                {
+                    for (int i = 0; i < 10; i++)
+                    {
+                        if (list[szamol].amount == 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+                        }
+                        else if (list[szamol].amount >= 1 && list[szamol].amount < 10)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+                        }
+                        else if (list[szamol].amount >= 10)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+
+                        }
+                        szamol++;
+                    }
+                    szamol--;
+                    figyel = Console.ReadKey();
+                    
+                    switch (figyel.Key)
+                    {
+                        case (ConsoleKey.UpArrow): 
+                            if(szamol >= 10)
+                            {
+                                Console.Clear();
+                                szamol -= 10;
+                            }
+                            break;
+                        case (ConsoleKey.DownArrow):
+                            if (szamol <= 90)
+                            {
+                                Console.Clear();
+                                szamol += 10;
+                            }
+                            break;
+                    }
+                }
+                while (figyel.Key != ConsoleKey.Backspace);
+                
+            }
         }
         static void Main(string[] args)
         {
-            List<Datas> list = new List<Datas>();
+            Datas temp2 = new Datas();
             StreamReader sr = new StreamReader("datas.txt");
             while (!sr.EndOfStream)
             {
+                Datas temp = new Datas();
                 string line = sr.ReadLine();
                 string[] split = line.Split(';');
-                Datas temp = new Datas();
                 temp.name = split[0];
                 temp.price = double.Parse(split[1]);
                 temp.amount = int.Parse(split[2]);
@@ -64,10 +156,9 @@ namespace ConsoleApp1
                 //kiíratás
                 if (keymenu.Key == ConsoleKey.Spacebar && mainmenu == 0)
                 {
-                    ConsoleKeyInfo keyfirst;
                     Console.WriteLine("Sima vagy részleges kiiratást akar? (s/r)");
                     string melyik = Console.ReadLine();
-                    while(melyik != "s" || melyik != "r" && melyik.Length !=1)
+                    while(melyik != "s" && melyik != "r" || melyik.Length !=1)
                     {
                         Console.WriteLine();
                         Console.WriteLine("Rossz input!");
@@ -76,49 +167,12 @@ namespace ConsoleApp1
                     //sima kiiratás
                     if(melyik == "s")
                     {
-                        do
-                        {
-                            Console.WriteLine("Neve,  Ára,  Raktáron,  Paraméterei");
-                            for (int i = 0; i < list.Count; i++)
-                            {
-                                if (list[i].amount == 0)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Red;
-                                    Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
-                                }
-                                else if (list[i].amount >= 1 && list[i].amount < 10)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Yellow;
-                                    Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
-                                }
-                                else if (list[i].amount >= 10)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Green;
-                                    Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
-
-                                }
-
-                            }
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine("---------------------------------------------------------------------------------------");
-                            Console.WriteLine("Fogytán lévő tekmékek: ");
-                            Console.WriteLine("---------------------------------------------------------------------------------------");
-                            for (int i = 0; i < list.Count; i++)
-                            {
-                                if (list[i].amount <= 10)
-                                {
-                                    Console.ForegroundColor = ConsoleColor.Cyan;
-                                    Console.WriteLine("---------------------------------------------------------------------------------------");
-                                    Console.WriteLine(list[i].name);
-                                }
-                            }
-                            keyfirst = Console.ReadKey();
-                        } while (keyfirst.Key != ConsoleKey.Backspace);
+                        temp2.s_kiirat();
                     }
                     //részleges kiiratás
                     else if(melyik == "r")
                     {
-                        //TO DO
+                        temp2.r_kiirat();
                     }
                     
                 }

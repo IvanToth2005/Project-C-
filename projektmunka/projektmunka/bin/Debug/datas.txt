@@ -97,7 +97,4 @@ APPLE iPhone 12 128 GB;237000;14;SIM kártya mérete: Nano-SIM (4FF) vagy eSim,H
 SAMSUNG GALAXY A34 6/128 GB;119000;5;Operációs rendszer: Android 13,Kijelző: AMOLED (Super AMOLED),Hátsó kamera: Triple Cam;
 SONY XPERIA 10 V 6/128 GB;165000;3;Memóriakártya max. kapacitása: 1 TB,Kijelző: OLED,Hátsó kamera: Triple Cam;
 NOKIA C21 PLUS 2/32 GB;36500;0;Kijelző: IPS,Hátsó kamera: Dual Cam,Akkumulátor kapacitás: 4000 mAh;
-Cheerble Wicked Egg okosjáték állatoknak;18000;999;LED, 300 mAh, USB kábel mellékelve, zöld;awdg;24;123;asf;
-hgj;34;5;zg;
-ad;23;23;ad;
-asd;12;2;asd ass aaa;
+Cheerble Wicked Egg okosjáték állatoknak;18000;999;LED, 300 mAh, USB kábel mellékelve, zöld;
