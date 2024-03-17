@@ -27,17 +27,17 @@ namespace ConsoleApp1
                     if (list[i].amount == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+                        Console.WriteLine(i+1+"." + list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
                     }
                     else if (list[i].amount >= 1 && list[i].amount < 10)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+                        Console.WriteLine(i+1+"." + list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
                     }
                     else if (list[i].amount >= 10)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+                        Console.WriteLine(i+1+"." + list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
 
                     }
 
@@ -73,17 +73,17 @@ namespace ConsoleApp1
                             if (szamol < 100 && list[szamol].amount == 0)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+                                Console.WriteLine(szamol+1+"." + list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
                             }
                             else if (szamol < 100 && list[szamol].amount >= 1 && list[szamol].amount < 10)
                             {
                                 Console.ForegroundColor = ConsoleColor.Yellow;
-                                Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+                                Console.WriteLine(szamol+1+"." + list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
                             }
                             else if (szamol < 100 && list[szamol].amount >= 10)
                             {
                                 Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+                                Console.WriteLine(szamol+1+"." + list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
 
                             }
                             if(szamol < 100)
@@ -185,11 +185,13 @@ namespace ConsoleApp1
                     Console.WriteLine("Számot kérek!");
                     id_ = Console.ReadLine();
                 }
-                int[] split = id.Split(' ');
+                string ideig = Convert.ToString(id);
+                string[] split = ideig.Split(';');
                 for(int i = 0; i < split.Length; i++)
                 {
-                    list.RemoveAt(split[i]);
+                    list.RemoveAt(Convert.ToInt32(split[i]));
                 }
+                Console.Clear();
             }
         }
         static void Main(string[] args)
