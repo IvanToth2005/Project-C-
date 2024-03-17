@@ -98,3 +98,7 @@ SAMSUNG GALAXY A34 6/128 GB;119000;5;Operációs rendszer: Android 13,Kijelző: 
 SONY XPERIA 10 V 6/128 GB;165000;3;Memóriakártya max. kapacitása: 1 TB,Kijelző: OLED,Hátsó kamera: Triple Cam;
 NOKIA C21 PLUS 2/32 GB;36500;0;Kijelző: IPS,Hátsó kamera: Dual Cam,Akkumulátor kapacitás: 4000 mAh;
 Cheerble Wicked Egg okosjáték állatoknak;18000;999;LED, 300 mAh, USB kábel mellékelve, zöld;
+aw;23;21;aw e a;
+e;45;34;sdt5;
+as;23;1;asfg ad adf;
+asd;123;34;asd esf af;

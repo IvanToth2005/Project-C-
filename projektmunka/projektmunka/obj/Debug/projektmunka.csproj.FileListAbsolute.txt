@@ -5,3 +5,11 @@ D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projekt
 D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.csproj.CoreCompileInputs.cache
 D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.exe
 D:\Demény Máté 11.P\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.pdb
+C:\Programozás\C#\Project-C-\projektmunka\projektmunka\bin\Debug\projektmunka.exe.config
+C:\Programozás\C#\Project-C-\projektmunka\projektmunka\bin\Debug\projektmunka.exe
+C:\Programozás\C#\Project-C-\projektmunka\projektmunka\bin\Debug\projektmunka.pdb
+C:\Programozás\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.csproj.AssemblyReference.cache
+C:\Programozás\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.csproj.SuggestedBindingRedirects.cache
+C:\Programozás\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.csproj.CoreCompileInputs.cache
+C:\Programozás\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.exe
+C:\Programozás\C#\Project-C-\projektmunka\projektmunka\obj\Debug\projektmunka.pdb
