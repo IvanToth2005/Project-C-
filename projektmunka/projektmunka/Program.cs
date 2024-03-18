@@ -312,7 +312,7 @@ namespace ConsoleApp1
 
             public void learazas()
             {
-                Console.WriteLine("Leárazás");
+                Console.WriteLine("Leárazások");
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Random rnd = new Random();
                 for (int i = 0; i < 5; i++)
@@ -325,7 +325,7 @@ namespace ConsoleApp1
         }
         static void Main(string[] args)
         {
-            //feltöltés
+            #region feltöltés
             Datas temp2 = new Datas();
             StreamReader sr = new StreamReader("datas.txt");
             while (!sr.EndOfStream)
@@ -340,7 +340,8 @@ namespace ConsoleApp1
                 list.Add(temp);
             }
             sr.Close();
-            //menü
+            #endregion
+            #region Menu
             string[] menu = { "Kiíratás", "Hozzáadás", "Eltávolítás", "Módosítás", "Leárazás" };
             int mainmenu = 0;
             ConsoleKeyInfo keymenu;
@@ -413,6 +414,7 @@ namespace ConsoleApp1
                     temp2.learazas();
                 }
             } while (keymenu.Key != ConsoleKey.Enter);
+            #endregion
         }
     }
 }
