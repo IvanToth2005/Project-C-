@@ -19,7 +19,7 @@ namespace ConsoleApp1
             public int amount;
             public string parameters;
 
-            public void s_kiirat()
+            public void s_kiirat(bool kelle)
             {
                 Console.WriteLine("Neve,  Ára,  Raktáron,  Paraméterei");
                 for (int i = 0; i < list.Count; i++)
@@ -43,18 +43,22 @@ namespace ConsoleApp1
 
                 }
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("---------------------------------------------------------------------------------------");
-                Console.WriteLine("Fogytán lévő tekmékek: ");
-                Console.WriteLine("---------------------------------------------------------------------------------------");
-                for (int i = 0; i < list.Count; i++)
+                if(kelle)
                 {
-                    if (list[i].amount <= 10)
+                    Console.WriteLine("---------------------------------------------------------------------------------------");
+                    Console.WriteLine("Fogytán lévő tekmékek: ");
+                    Console.WriteLine("---------------------------------------------------------------------------------------");
+                    for (int i = 0; i < list.Count; i++)
                     {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine("---------------------------------------------------------------------------------------");
-                        Console.WriteLine(list[i].name);
+                        if (list[i].amount <= 10)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine("---------------------------------------------------------------------------------------");
+                            Console.WriteLine(list[i].name);
+                        }
                     }
                 }
+                
                 Console.ReadKey();
             }
 
@@ -171,31 +175,157 @@ namespace ConsoleApp1
             public void torles()
             {
                 Datas temp2 = new Datas();
-                Console.WriteLine("Egy billentyűt lenyomva válassza ki a törlni kívánt elemek id-jét!");
+                Console.WriteLine("Az entert lenyomva válassza ki a törlni kívánt elemek id-jét!");
                 Thread.Sleep(5000);
                 Console.Clear();
-                temp2.s_kiirat();
+                bool kelle = false;
+                temp2.s_kiirat(kelle);
                 Console.ReadKey();
                 Console.Clear();
-                Console.WriteLine("Kérem a id(k)-at!");
+                Console.WriteLine("Kérem a id(k)-at!(ha több spaceval elválasztva)");
                 string id_ = Console.ReadLine();
                 int id;
-                while (!int.TryParse(id_, out id))
+                string[] split = id_.Split(' ');
+                int k = 0;
+                bool joe = false;
+                do
                 {
-                    Console.WriteLine("Számot kérek!");
-                    id_ = Console.ReadLine();
+                    while (!int.TryParse(split[k], out id) || split.Length != split.Distinct().Count() || Convert.ToInt32(split[k]) > list.Count || Convert.ToInt32(split[k]) < 1)
+                    {
+                        //lekezelések
+                        //szam-e?
+                        if (!int.TryParse(split[k], out id))
+                        {
+                            Console.WriteLine($"A {k + 1}. érték nem szám!");
+                        }
+                        //ha túl nagy/kicsi a szám
+                        else if (Convert.ToInt32(split[k]) > list.Count || Convert.ToInt32(split[k]) < 1)
+                        {
+                            Console.WriteLine("Nincs ilyen id-jű termék!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ne legyen ismétlődő szám!");
+                        }
+                        id_ = Console.ReadLine();
+                        split = id_.Split(' ');
+                        k = 0;
+                    }
+                    k++;
+                    if (k == split.Length)
+                    {
+                        joe = true;
+                    }
                 }
-                string ideig = Convert.ToString(id);
-                string[] split = ideig.Split(';');
-                for(int i = 0; i < split.Length; i++)
+                while (!joe);
+                Array.Sort(split);
+                for (int i = split.Length; i > 0 ; i--)
                 {
-                    list.RemoveAt(Convert.ToInt32(split[i]));
+                    list.RemoveAt(Convert.ToInt32(split[i-1])-1);
                 }
                 Console.Clear();
+            }
+
+            public void modositas()
+            {
+                Datas temp2 = new Datas();
+                Console.WriteLine("Az entert lenyomva válassza ki a módosítani kívánt elemek id-jét!");
+                Thread.Sleep(5000);
+                Console.Clear();
+                bool kelle = false;
+                temp2.s_kiirat(kelle);
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("Kérem a id(k)-at! (ha több spaceval elválasztva)");
+                string id_ = Console.ReadLine();
+                int id;
+                string[] split = id_.Split(' ');
+                int k = 0;
+                bool joe = false;
+                do
+                {
+                    while (!int.TryParse(split[k], out id) || split.Length != split.Distinct().Count() || Convert.ToInt32(split[k]) > list.Count || Convert.ToInt32(split[k]) < 1)
+                    {
+                        //lekezelések
+                        //szam-e?
+                        if(!int.TryParse(split[k], out id))
+                        {
+                            Console.WriteLine($"A {k + 1}. érték nem szám!");
+                        }
+                        //ha túl nagy/kicsi a szám
+                        else if (Convert.ToInt32(split[k]) > list.Count || Convert.ToInt32(split[k]) < 1)
+                        {
+                            Console.WriteLine("Nincs ilyen id-jű termék!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ne legyen ismétlődő szám!");
+                        }
+                        id_ = Console.ReadLine();
+                        split = id_.Split(' ');
+                        k = 0;
+                    }
+                    k++;
+                    if (k == split.Length)
+                    {
+                        joe = true;
+                    }
+                }
+                while (!joe);
+                for(int i = 0; i < split.Length; i++)
+                {
+                    int x = Convert.ToInt32(split[i])-1;
+                    Console.WriteLine($"{i+1}. elem:");
+                    Console.WriteLine(i + 1 + "." + list[x].name + "; " + list[x].price + "; " + list[x].amount + "; " + list[x].parameters);
+                    Console.WriteLine("Változtatások:");
+                    //név
+                    Console.WriteLine("Neve:");
+                    list[x].name = Console.ReadLine();
+                    double ar;
+                    Console.Clear();
+                    //ár
+                    Console.WriteLine("Ára:");
+                    string ar_ = Console.ReadLine();
+                    while (!double.TryParse(ar_, out ar))
+                    {
+                        Console.WriteLine("Számot kérek!");
+                        ar_ = Console.ReadLine();
+                    }
+                    list[x].price = ar;
+                    Console.Clear();
+                    //mennyiség
+                    Console.WriteLine("Mennyisége:");
+                    ar_ = Console.ReadLine();
+                    while (!double.TryParse(ar_, out ar))
+                    {
+                        Console.WriteLine("Számot kérek!");
+                        ar_ = Console.ReadLine();
+                    }
+                    list[x].amount = Convert.ToInt32(ar);
+                    Console.Clear();
+                    //paraméterek
+                    Console.WriteLine("Paraméterei:");
+                    list[x].parameters = Console.ReadLine();
+                    Console.Clear();
+                }
+            }
+
+            public void learazas()
+            {
+                Console.WriteLine("Leárazás");
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Random rnd = new Random();
+                for (int i = 0; i < 5; i++)
+                {
+                    int temporary = rnd.Next(list.Count);
+                    Console.WriteLine(list[temporary].name + ",  " + list[temporary].price * 0.9);
+                }
+                Console.ReadKey();
             }
         }
         static void Main(string[] args)
         {
+            //feltöltés
             Datas temp2 = new Datas();
             StreamReader sr = new StreamReader("datas.txt");
             while (!sr.EndOfStream)
@@ -210,7 +340,7 @@ namespace ConsoleApp1
                 list.Add(temp);
             }
             sr.Close();
-
+            //menü
             string[] menu = { "Kiíratás", "Hozzáadás", "Eltávolítás", "Módosítás", "Leárazás" };
             int mainmenu = 0;
             ConsoleKeyInfo keymenu;
@@ -252,7 +382,8 @@ namespace ConsoleApp1
                     //sima kiiratás
                     if(melyik == "s")
                     {
-                        temp2.s_kiirat();
+                        bool kelle = true;
+                        temp2.s_kiirat(kelle);
                     }
                     //részleges kiiratás
                     else if(melyik == "r")
@@ -274,34 +405,12 @@ namespace ConsoleApp1
                 //módosítás
                 if (keymenu.Key == ConsoleKey.Spacebar && mainmenu == 3)
                 {
-                    ConsoleKeyInfo keyfourth;
-                    Console.WriteLine("Módosítás");
-                    do
-                    {
-                        Console.WriteLine("Nyomja le az entert ismeri a módosítani kívánt termék(ek) id-jét!");
-                        Thread.Sleep(5000);
-
-
-
-                        keyfourth = Console.ReadKey();
-                    } while (keyfourth.Key != ConsoleKey.Backspace);
+                    temp2.modositas();
                 }
+                //leárazás
                 if (keymenu.Key == ConsoleKey.Spacebar && mainmenu == 4)
                 {
-                    ConsoleKeyInfo keyfifth;
-                    Console.WriteLine("Leárazás");
-                    do
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Random rnd = new Random();
-                        for (int i = 0; i < 5; i++)
-                        {
-                            int temporary = rnd.Next(list.Count);
-                            Console.WriteLine(list[temporary].name + ",  " + list[temporary].price * 0.9);
-                        }
-
-                        keyfifth = Console.ReadKey();
-                    } while (keyfifth.Key != ConsoleKey.Backspace);
+                    temp2.learazas();
                 }
             } while (keymenu.Key != ConsoleKey.Enter);
         }
