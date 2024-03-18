@@ -27,17 +27,17 @@ namespace ConsoleApp1
                     if (list[i].amount == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+                        Console.WriteLine(i+1+"." + list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
                     }
                     else if (list[i].amount >= 1 && list[i].amount < 10)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+                        Console.WriteLine(i+1+"." + list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
                     }
                     else if (list[i].amount >= 10)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
+                        Console.WriteLine(i+1+"." + list[i].name + "; " + list[i].price + "; " + list[i].amount + "; " + list[i].parameters);
 
                     }
 
@@ -60,53 +60,138 @@ namespace ConsoleApp1
 
             public void r_kiirat()
             {
+                Console.Clear();
                 ConsoleKeyInfo figyel;
                 int szamol = 0;
+                bool valtozas = true;
                 do
                 {
-                    for (int i = 0; i < 10; i++)
+                    if(valtozas)
                     {
-                        if (list[szamol].amount == 0)
+                        for (int i = 0; i < 10; i++)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
-                        }
-                        else if (list[szamol].amount >= 1 && list[szamol].amount < 10)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
-                        }
-                        else if (list[szamol].amount >= 10)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine(list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+                            if (szamol < 100 && list[szamol].amount == 0)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine(szamol+1+"." + list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+                            }
+                            else if (szamol < 100 && list[szamol].amount >= 1 && list[szamol].amount < 10)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine(szamol+1+"." + list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
+                            }
+                            else if (szamol < 100 && list[szamol].amount >= 10)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine(szamol+1+"." + list[szamol].name + "; " + list[szamol].price + "; " + list[szamol].amount + "; " + list[szamol].parameters);
 
+                            }
+                            if(szamol < 100)
+                            {
+                                szamol++;
+                            }
                         }
-                        szamol++;
                     }
+                    valtozas = false;
                     szamol--;
                     figyel = Console.ReadKey();
                     
                     switch (figyel.Key)
                     {
                         case (ConsoleKey.UpArrow): 
-                            if(szamol >= 10)
+                            if(szamol >= 19)
                             {
                                 Console.Clear();
-                                szamol -= 10;
+                                szamol -= 19;
+                                valtozas = true;
                             }
                             break;
                         case (ConsoleKey.DownArrow):
-                            if (szamol <= 90)
+                            if (szamol <= 99)
                             {
                                 Console.Clear();
-                                szamol += 10;
+                                szamol += 1;
+                                valtozas = true;
                             }
                             break;
                     }
                 }
                 while (figyel.Key != ConsoleKey.Backspace);
                 
+            }
+
+            public void hozzaad()
+            {                    
+                    Console.WriteLine("Hány terméket akar hozzáadni?");
+                    int hany = Convert.ToInt32(Console.ReadLine());
+                    for(int i = 0; i <hany; i++)
+                    {
+                        Console.WriteLine("Hozzáadás");
+                        StreamWriter srw = File.AppendText("datas.txt");
+                        Console.WriteLine("Írd be a termék nevét: ");
+                        string nameadd = Console.ReadLine();
+                        srw.Write(nameadd);
+                        srw.Write(";");
+
+                        //szám lekezelés1
+                        double priceadd;
+                        Console.WriteLine("Írd be a termék árát: ");
+                        string priceadd_ = Console.ReadLine();
+                        while (!double.TryParse(priceadd_, out priceadd))
+                        {
+                            Console.WriteLine("Számot kérek!");
+                            priceadd_ = Console.ReadLine();
+                        }
+
+                        srw.Write(priceadd);
+                        srw.Write(";");
+
+
+                        Console.WriteLine("Írd be a raktáron lévő termékek számát: ");
+                        //szám lekezelés2
+                        int amountadd;
+                        string amountadd_ = Console.ReadLine();
+                        while (!int.TryParse(amountadd_, out amountadd))
+                        {
+                            Console.WriteLine("Számot kérek!");
+                            amountadd_ = Console.ReadLine();
+                        }
+
+                        srw.Write(amountadd);
+                        srw.Write(";");
+
+                        Console.WriteLine("Írd be a termék paramétereit: ");
+                        string parameteradd = Console.ReadLine();
+                        srw.Write(parameteradd);
+                        srw.WriteLine(";");
+                        srw.Close();
+                    }
+            }
+
+            public void torles()
+            {
+                Datas temp2 = new Datas();
+                Console.WriteLine("Egy billentyűt lenyomva válassza ki a törlni kívánt elemek id-jét!");
+                Thread.Sleep(5000);
+                Console.Clear();
+                temp2.s_kiirat();
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("Kérem a id(k)-at!");
+                string id_ = Console.ReadLine();
+                int id;
+                while (!int.TryParse(id_, out id))
+                {
+                    Console.WriteLine("Számot kérek!");
+                    id_ = Console.ReadLine();
+                }
+                string ideig = Convert.ToString(id);
+                string[] split = ideig.Split(';');
+                for(int i = 0; i < split.Length; i++)
+                {
+                    list.RemoveAt(Convert.ToInt32(split[i]));
+                }
+                Console.Clear();
             }
         }
         static void Main(string[] args)
@@ -179,69 +264,12 @@ namespace ConsoleApp1
                 //hozzáadas
                 if (keymenu.Key == ConsoleKey.Spacebar && mainmenu == 1)
                 {
-                    ConsoleKeyInfo keysecond;
-                    do
-                    {
-                        Console.WriteLine("Hány terméket akar hozzáadni?");
-                        int hany = Convert.ToInt32(Console.ReadLine());
-                        for(int i = 0; i <hany; i++)
-                        {
-                            Console.WriteLine("Hozzáadás");
-                            StreamWriter srw = File.AppendText("datas.txt");
-                            Console.WriteLine("Írd be a termék nevét: ");
-                            string nameadd = Console.ReadLine();
-                            srw.Write(nameadd);
-                            srw.Write(";");
-
-                            //szám lekezelés1
-                            double priceadd;
-                            Console.WriteLine("Írd be a termék árát: ");
-                            string priceadd_ = Console.ReadLine();
-                            while (!double.TryParse(priceadd_, out priceadd))
-                            {
-                                Console.WriteLine("Számot kérek!");
-                                priceadd_ = Console.ReadLine();
-                            }
-
-                            srw.Write(priceadd);
-                            srw.Write(";");
-
-
-                            Console.WriteLine("Írd be a raktáron lévő termékek számát: ");
-                            //szám lekezelés2
-                            int amountadd;
-                            string amountadd_ = Console.ReadLine();
-                            while (!int.TryParse(amountadd_, out amountadd))
-                            {
-                                Console.WriteLine("Számot kérek!");
-                                amountadd_ = Console.ReadLine();
-                            }
-
-                            srw.Write(amountadd);
-                            srw.Write(";");
-
-                            Console.WriteLine("Írd be a termék paramétereit: ");
-                            string parameteradd = Console.ReadLine();
-                            srw.Write(parameteradd);
-                            srw.WriteLine(";");
-                            srw.Close();
-                        }
-                        keysecond = Console.ReadKey();
-                    } while (keysecond.Key != ConsoleKey.Backspace);
+                    temp2.hozzaad();
                 }
                 //törlés
                 if (keymenu.Key == ConsoleKey.Spacebar && mainmenu == 2)
                 {
-                    ConsoleKeyInfo keythird;
-                    Console.WriteLine("Törlés");
-                    do
-                    {
-
-
-                        //TO DO törlés
-
-                        keythird = Console.ReadKey();
-                    } while (keythird.Key != ConsoleKey.Backspace);
+                    temp2.torles();
                 }
                 //módosítás
                 if (keymenu.Key == ConsoleKey.Spacebar && mainmenu == 3)
